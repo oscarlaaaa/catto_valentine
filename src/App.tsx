@@ -2,6 +2,8 @@ import "./App.css";
 import { SceneProvider } from "./context/SceneProvider";
 import Container from "@mui/material/Container";
 import { SceneContainer } from "./components/game/SceneContainer";
+import { ContentProvider } from "./context/ContentProvider";
+import { ContentContainer } from "./components/game/ContentContainer";
 
 function App() {
   return (
@@ -15,7 +17,11 @@ function App() {
       }}
     >
       <SceneProvider>
-        <SceneContainer></SceneContainer>
+        <ContentProvider>
+          <SceneContainer>
+            <ContentContainer />
+          </SceneContainer>
+        </ContentProvider>
       </SceneProvider>
     </Container>
   );

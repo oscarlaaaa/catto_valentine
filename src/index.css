@@ -66,3 +66,19 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+@keyframes horizontal-shaking {
+ 0% { transform: translateX(0) }
+ 25% { transform: translateX(10px) }
+ 50% { transform: translateX(-10px) }
+ 75% { transform: translateX(10px) }
+ 100% { transform: translateX(0) }
+}
+
+@keyframes smack {
+ 0% { transform: translateY(-40px) }
+ 25% { transform: translateY(-20px) }
+ 50% { transform: translateY(0px) }
+ 75% { transform: translateY(20px) }
+ 100% { transform: translateY(40px) }
+}

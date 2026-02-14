@@ -1,31 +1,16 @@
 import Box from "@mui/material/Box";
-import { useSceneStateContext } from "../../context/SceneProvider";
+import { useSceneContext } from "../../context/SceneProvider";
 import { useState, type PropsWithChildren } from "react";
-import type { Scene } from "../../types/Scene";
 import { Container } from "@mui/material";
-import { StartScreen } from "../menu/StartScreen";
 import { wait } from "../../utils/wait";
 
 const TRANSITION_TIME_MS = 2000;
 const TRANSITION_TIME_S = TRANSITION_TIME_MS / 1000;
 
 export const SceneContainer = ({ children }: PropsWithChildren) => {
-  const { scene } = useSceneStateContext();
-  const [currentScene, setCurrentScene] = useState<Scene | null>(() => scene);
-  const [showBlackScreen, setShowBlackScreen] = useState(false);
+  const { scene, showBlackScreen } = useSceneContext();
 
-  const updateScene = async (scene: Scene | null) => {
-    setShowBlackScreen(true);
-    await wait(TRANSITION_TIME_MS);
-    setCurrentScene(scene);
-    setShowBlackScreen(false);
-  };
-
-  if (scene !== currentScene && !showBlackScreen) {
-    updateScene(scene);
-  }
-
-  const gameStarted = !!currentScene?.backgroundImagePath;
+  const hasBackground = !!scene?.backgroundImagePath;
 
   return (
     <Container
@@ -35,17 +20,15 @@ export const SceneContainer = ({ children }: PropsWithChildren) => {
         padding: 0,
       }}
       style={
-        gameStarted
+        hasBackground
           ? {
-              backgroundImage: `url('${currentScene.backgroundImagePath}')`,
+              backgroundImage: `url('${scene.backgroundImagePath}')`,
               backgroundSize: "cover",
             }
-          : {
-              backgroundColor: "#69a2be",
-            }
+          : {}
       }
     >
-      {gameStarted ? children : <StartScreen />}
+      {children}
       <BlackScreen showBlackScreen={showBlackScreen} />
     </Container>
   );
