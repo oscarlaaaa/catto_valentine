@@ -1,4 +1,4 @@
-import type { Content, Scene } from "../../types/Scene";
+import { ActionId, type Content, type Scene } from "../../types/Scene";
 import PARK_SCENE_URL from "@assets/backgrounds/park-background-image.webp";
 import { RESTAURANT_SCENE } from "./3_restaurant_scene";
 import { CHARACTERS } from "../characters";
@@ -48,6 +48,11 @@ const PSYDUCK_SCENE: Record<string, Content> = {
     next: "parko-oscaro-5",
     portraitImagePath: CHARACTERS.Oscar.images.portraits.normal,
     fullBodyImagePath: CHARACTERS.Oscar.images.full.stare,
+  },
+  "parko-oscaro-5": {
+    type: "action",
+    actionId: ActionId.PAT_PSYDUCK,
+    next: null,
   },
 };
 

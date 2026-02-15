@@ -28,6 +28,8 @@ export const DecisionContent = ({
       sx={{
         width: "100%",
         height: "100%",
+        maxWidth: "500px",
+        maxHeight: "1000px",
         padding: 2,
         position: "absolute",
         left: 0,

@@ -61,6 +61,8 @@ export const SmackOscarScreen = () => {
       sx={{
         width: "100%",
         height: "100%",
+        maxWidth: "500px",
+        maxHeight: "1000px",
         padding: 0,
       }}
     >

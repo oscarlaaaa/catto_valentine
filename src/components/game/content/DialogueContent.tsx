@@ -34,6 +34,8 @@ export const DialogueContent = ({
     <Container
       sx={{
         width: "100%",
+        maxWidth: "500px",
+        maxHeight: "1000px",
         height: "100%",
         padding: 2,
         position: "absolute",

@@ -17,6 +17,8 @@ export const SceneContainer = ({ children }: PropsWithChildren) => {
       sx={{
         width: "100%",
         height: "100%",
+        maxWidth: "500px",
+        maxHeight: "1000px",
         padding: 0,
       }}
       style={
@@ -57,6 +59,8 @@ const BlackScreen = ({ showBlackScreen }: { showBlackScreen: boolean }) => {
       position="absolute"
       width={isDisplayed ? "100%" : "0px"}
       height={isDisplayed ? "100%" : "0px"}
+      maxWidth="500px"
+      maxHeight="1000px"
       sx={{
         backgroundColor: "black",
         zIndex: showBlackScreen ? 10000 : 0,

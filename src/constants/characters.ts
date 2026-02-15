@@ -53,7 +53,7 @@ const PEEPO_CHARACTER: Character = {
 };
 
 import PSYDUCK_PORTRAIT from "@assets/portraits/psyduck.webp";
-import PSYDUCK_SAD_PORTRAIT from "@assets/full_body/peepo-cry.webp";
+// import PSYDUCK_SAD_PORTRAIT from "@assets/full_body/peepo-cry.webp";
 
 import PSYDUCK_FULL from "@assets/full_body/psyduck.webp";
 
