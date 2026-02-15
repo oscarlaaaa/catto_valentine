@@ -32,6 +32,8 @@ export const ActionId = {
   BEAT_PEEPO: "action-2-beat-peepo",
   SMACK_OSCAR: "action-3-smack-oscar",
   PAT_PSYDUCK: "action-4-pat-ducko",
+  PUSH_OSCAR: "action-5-push-oscar",
+  LAST_SCREEN: "action-6-last-screen",
 } as const;
 
 export interface Decision extends ContentType {

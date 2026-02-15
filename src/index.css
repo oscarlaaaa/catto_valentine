@@ -82,3 +82,27 @@ button:focus-visible {
  75% { transform: translateY(20px) }
  100% { transform: translateY(40px) }
 }
+
+@keyframes wiggle {
+ 0% { transform: rotate(0deg) }
+ 9% { transform: rotate(3deg) }
+ 18% { transform: rotate(7deg) }
+ 27% { transform: rotate(10deg) }
+ 36% { transform: rotate(7deg) }
+ 45% { transform: rotate(3deg) }
+ 54% { transform: rotate(0deg) }
+ 63% { transform: rotate(-3deg) }
+ 72% { transform: rotate(-7deg) }
+ 81% { transform: rotate(-10deg) }
+ 90% { transform: rotate(-7deg) }
+ 100% { transform: rotate(-3deg) }
+}
+
+@keyframes toppled {
+ 0% { transform: rotate(-15deg) }
+ 20% { transform: rotate(-30deg) }
+ 40% { transform: rotate(-45deg) }
+ 60% { transform: rotate(-60deg) }
+ 80% { transform: rotate(-75deg) }
+ 100% { transform: rotate(-90deg) }
+}

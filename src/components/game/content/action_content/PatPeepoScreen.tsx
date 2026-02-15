@@ -10,6 +10,7 @@ import PEEPO_CRY_IMAGE_URL from "@assets/full_body/peepo-cry.webp";
 import PEEPO_CRY_PORTRAIT_IMAGE_URL from "@assets/portraits/peepo-cry.webp";
 
 import HAND_IMAGE_URL from "@assets/misc/hand.webp";
+import POW_IMAGE_URL from "@assets/misc/pow.webp";
 import { useContentContext } from "../../../../context/ContentProvider";
 import { DialogueTextBox } from "../DialogueContent";
 import { Avatar, Card, CardHeader, Collapse } from "@mui/material";
@@ -17,7 +18,7 @@ import { wait } from "../../../../utils/wait";
 
 export const PatPeepoScreen = () => {
   const { setCanAdvance, advanceContent } = useContentContext();
-  const [peepoDamage, setPeepoDamage] = useState(196);
+  const [peepoDamage, setPeepoDamage] = useState(0);
   const [isShaking, setIsShaking] = useState(false);
   const [peepoDamageText, setPeepoDamageText] = useState<string | null>(null);
   const [smackPosition, setSmackPosition] = useState<[number, number] | null>(
@@ -126,19 +127,34 @@ export const PatPeepoScreen = () => {
         />
       )}
       {!!smackPosition && (
-        <img
-          src={HAND_IMAGE_URL}
-          alt="hand"
-          style={{
-            width: "200px",
-            height: "100px",
-            animation: "smack 0.1s",
-            position: "absolute",
-            top: smackPosition[1] - 50,
-            left: smackPosition[0] / 2,
-            rotate: `${getRandomNumber(-45, 45)}deg`,
-          }}
-        />
+        <>
+          <img
+            src={HAND_IMAGE_URL}
+            alt="hand"
+            style={{
+              width: "200px",
+              height: "100px",
+              animation: "smack 0.1s",
+              position: "absolute",
+              top: smackPosition[1] - 50,
+              left: smackPosition[0] / 2,
+              rotate: `${getRandomNumber(-45, 45)}deg`,
+              zIndex: 10000,
+            }}
+          />
+          <img
+            src={POW_IMAGE_URL}
+            alt="hand"
+            style={{
+              width: "250px",
+              height: "125px",
+              animation: "fade-in 0.1s",
+              position: "absolute",
+              top: smackPosition[1],
+              left: smackPosition[0] / 2,
+            }}
+          />
+        </>
       )}
       <Stack
         sx={{

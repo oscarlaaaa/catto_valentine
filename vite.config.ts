@@ -10,7 +10,6 @@ export default defineConfig({
       usePolling: true,
     },
   },
-  base: "/catto-valentine/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

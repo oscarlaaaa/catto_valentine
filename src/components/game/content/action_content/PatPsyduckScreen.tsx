@@ -7,13 +7,14 @@ import PSYDUCK_IMAGE_URL from "@assets/full_body/psyduck.webp";
 import PSYDUCK_PORTRAIT_IMAGE_URL from "@assets/portraits/psyduck.webp";
 
 import HAND_IMAGE_URL from "@assets/misc/hand.webp";
+import POW_IMAGE_URL from "@assets/misc/pow.webp";
 import { useContentContext } from "../../../../context/ContentProvider";
 import { DialogueTextBox } from "../DialogueContent";
 import { wait } from "../../../../utils/wait";
 
 export const PatPsyduckScreen = () => {
   const { setCanAdvance, advanceContent } = useContentContext();
-  const [clickCount, setClickCount] = useState(0);
+  const [clickCount, setClickCount] = useState(19);
   const [isShaking, setIsShaking] = useState(false);
   const [smacked, setSmacked] = useState(false);
   const [psyduckText, setPsyduckText] = useState<string | null>(null);
@@ -24,6 +25,10 @@ export const PatPsyduckScreen = () => {
   const timeoutRef = useRef<number | null>(null);
 
   const pat = (event: { clientX: number; clientY: number }) => {
+    if (isShaking) {
+      return;
+    }
+
     const { clientX, clientY } = event;
     setIsShaking(true);
     setSmackPosition([clientX, clientY]);
@@ -35,26 +40,30 @@ export const PatPsyduckScreen = () => {
       clearTimeout(timeoutRef.current);
     }
 
-    timeoutRef.current = setTimeout(() => setIsShaking(false), 100);
+    timeoutRef.current = setTimeout(() => setIsShaking(false), 500);
   };
 
   const smack = (event: { clientX: number; clientY: number }) => {
+    if (smacked) {
+      return;
+    }
+
     const { clientX, clientY } = event;
     setSmacked(true);
     setSmackPosition([clientX, clientY]);
     setTimeout(() => {
       setSmackPosition(null);
-    }, 100);
+    }, 300);
   };
 
-  const disableClick = clickCount === 40;
+  const disableClick = clickCount === 20;
 
   const handleClick: React.MouseEventHandler = (event) => {
     if (disableClick) {
       return;
     }
 
-    if (clickCount >= 39) {
+    if (clickCount >= 19) {
       smack(event);
     } else {
       pat(event);
@@ -65,9 +74,9 @@ export const PatPsyduckScreen = () => {
   useEffect(() => {
     if (clickCount === 5) {
       setPsyduckText("Psssyyyyy...");
-    } else if (clickCount === 20) {
+    } else if (clickCount === 15) {
       setPsyduckText("Wa-wa-wa-wa-wa-wa-wa-wa-wa");
-    } else if (clickCount === 40) {
+    } else if (clickCount === 20) {
       (async () => {
         await wait(2000);
         advanceContent();
@@ -105,14 +114,16 @@ export const PatPsyduckScreen = () => {
             src={PSYDUCK_IMAGE_URL}
             alt="ducko sleepo"
             style={{
-              width: "350px",
-              height: `auto`,
-              animation: isShaking
-                ? smacked
-                  ? "horizontal-shaking 0.1s"
-                  : "horizontal-shaking 0.5s"
-                : "none",
-              rotate: smacked ? "rotate(90deg)" : "none",
+              width: smacked ? "auto" : "350px",
+              height: smacked ? "100vw" : `auto`,
+              animationName: smacked ? "toppled" : !isShaking ? "" : "wiggle",
+              animationDuration: smacked ? "0.3s" : !isShaking ? "" : "0.5s",
+              animationIterationCount: smacked
+                ? "1"
+                : !isShaking
+                  ? "none"
+                  : "infinite",
+              animationFillMode: smacked ? "forwards" : "none",
             }}
           />
         </Stack>
@@ -133,19 +144,36 @@ export const PatPsyduckScreen = () => {
         />
       )}
       {!!smackPosition && (
-        <img
-          src={HAND_IMAGE_URL}
-          alt="hand"
-          style={{
-            width: "200px",
-            height: "100px",
-            animation: "smack 0.5s",
-            position: "absolute",
-            top: smackPosition[1] - 50,
-            left: smackPosition[0] / 2,
-            rotate: `${getRandomNumber(-45, 45)}deg`,
-          }}
-        />
+        <>
+          <img
+            src={HAND_IMAGE_URL}
+            alt="hand"
+            style={{
+              width: "200px",
+              height: "100px",
+              animation: smacked ? "smack 0.1s" : "smack 0.5s",
+              position: "absolute",
+              top: smackPosition[1] - 50,
+              left: smackPosition[0] / 2,
+              rotate: `${getRandomNumber(-45, 45)}deg`,
+              zIndex: 10000,
+            }}
+          />
+          {smacked && (
+            <img
+              src={POW_IMAGE_URL}
+              alt="hand"
+              style={{
+                width: "250px",
+                height: "125px",
+                animation: "fade-in 0.1s",
+                position: "absolute",
+                top: smackPosition[1],
+                left: smackPosition[0] / 2,
+              }}
+            />
+          )}
+        </>
       )}
     </Container>
   );

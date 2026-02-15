@@ -6,9 +6,16 @@ import { useEffect, useState } from "react";
 import { CHARACTERS } from "../../../../constants/characters";
 
 import HAND_IMAGE_URL from "@assets/misc/hand.webp";
+import POW_IMAGE_URL from "@assets/misc/pow.webp";
 import { useContentContext } from "../../../../context/ContentProvider";
 
-export const SmackOscarScreen = () => {
+export const SmackOscarScreen = ({
+  startingImage,
+  handImage,
+}: {
+  startingImage?: string;
+  handImage?: string;
+}) => {
   const { advanceContent, setCanAdvance } = useContentContext();
   const [isShaking, setIsShaking] = useState(false);
   const [smackPosition, setSmackPosition] = useState<[number, number] | null>(
@@ -16,7 +23,7 @@ export const SmackOscarScreen = () => {
   );
   const [hasClicked, setHasClicked] = useState(false);
   const [currentImage, setCurrentImage] = useState<string>(
-    CHARACTERS.Oscar.images.full.normal,
+    startingImage ?? CHARACTERS.Oscar.images.full.normal,
   );
 
   const smack = (event: { clientX: number; clientY: number }) => {
@@ -91,19 +98,34 @@ export const SmackOscarScreen = () => {
         </Stack>
       </Button>
       {!!smackPosition && (
-        <img
-          src={HAND_IMAGE_URL}
-          alt="hand"
-          style={{
-            width: "200px",
-            height: "100px",
-            animation: "smack 0.1s",
-            position: "absolute",
-            top: smackPosition[1] - 50,
-            left: smackPosition[0] / 2,
-            rotate: `${getRandomNumber(-45, 45)}deg`,
-          }}
-        />
+        <>
+          <img
+            src={handImage ?? HAND_IMAGE_URL}
+            alt="hand"
+            style={{
+              width: "200px",
+              height: "100px",
+              animation: "smack 0.1s",
+              position: "absolute",
+              top: smackPosition[1] - 50,
+              left: smackPosition[0] / 2,
+              rotate: `${getRandomNumber(-45, 45)}deg`,
+              zIndex: 10000,
+            }}
+          />
+          <img
+            src={POW_IMAGE_URL}
+            alt="hand"
+            style={{
+              width: "250px",
+              height: "125px",
+              animation: "fade-in 0.1s",
+              position: "absolute",
+              top: smackPosition[1],
+              left: smackPosition[0] / 2,
+            }}
+          />
+        </>
       )}
     </Container>
   );

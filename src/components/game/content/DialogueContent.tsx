@@ -2,7 +2,8 @@ import Container from "@mui/material/Container";
 import { useContentContext } from "../../../context/ContentProvider";
 import {
   Avatar,
-  Button,
+  Box,
+  ButtonBase,
   Card,
   CardActions,
   CardContent,
@@ -41,11 +42,15 @@ export const DialogueContent = ({
         position: "absolute",
         left: 0,
         top: 0,
-        backgroundColor: "rgba(0,0,0,0.5)",
+        backgroundColor: "rgba(80, 80, 80, 0.42)",
       }}
     >
-      <img />
-      <Button onClick={onAdvance} sx={{ width: "100%", height: "100%" }}>
+      <ButtonBase
+        onClick={onAdvance}
+        sx={{ width: "100%", height: "100%" }}
+        disableRipple
+        disableTouchRipple
+      >
         {currentDialogue && (
           <DialogueTextBox
             speaker={speaker}
@@ -55,7 +60,7 @@ export const DialogueContent = ({
             onRenderComplete={() => setTimeout(() => setCanAdvance(true), 500)}
           />
         )}
-      </Button>
+      </ButtonBase>
     </Container>
   );
 };
@@ -79,59 +84,72 @@ export const DialogueTextBox = ({
   return (
     <Stack sx={{ width: "100%", textAlign: "left" }}>
       {fullBodyImagePath && (
-        <Stack width="100%" direction="row-reverse" minHeight="50%">
+        <Stack
+          width="100%"
+          direction="row-reverse"
+          minHeight="50%"
+          maxHeight="70%"
+        >
           <img
             src={fullBodyImagePath}
             alt="peep"
             style={{
               height: "auto",
-              width: "50%",
+              width: "auto",
+              maxHeight: "500px",
+              maxWidth: "50%",
             }}
           />
         </Stack>
       )}
-      <Card
-        variant="elevation"
-        sx={{ width: "100%", textAlign: "left", ...sxOverrides }}
-      >
-        <CardContent>
-          <Stack direction="row" gap={2}>
-            {portraitImagePath && (
-              <Avatar
-                alt="peepo"
-                src={portraitImagePath}
-                variant="rounded"
-                sx={{ height: "60px", width: "60px", border: "2px solid grey" }}
-              />
-            )}
-            <Stack>
-              {speaker && (
-                <Typography
-                  gutterBottom
+      <Box width="100%" minHeight="200px">
+        <Card
+          variant="elevation"
+          sx={{ width: "100%", textAlign: "left", ...sxOverrides }}
+        >
+          <CardContent>
+            <Stack direction="row" gap={2}>
+              {portraitImagePath && (
+                <Avatar
+                  alt="peepo"
+                  src={portraitImagePath}
+                  variant="rounded"
                   sx={{
-                    color: "text.secondary",
-                    fontSize: 14,
-                    fontWeight: "bold",
+                    height: "60px",
+                    width: "60px",
+                    border: "2px solid grey",
                   }}
-                >
-                  {speaker}
-                </Typography>
+                />
               )}
-              <Typography
-                variant="body2"
-                sx={{ textTransform: "none", minHeight: "20px" }}
-              >
-                {displayedText}
-              </Typography>
+              <Stack>
+                {speaker && (
+                  <Typography
+                    gutterBottom
+                    sx={{
+                      color: "text.secondary",
+                      fontSize: 14,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {speaker}
+                  </Typography>
+                )}
+                <Typography
+                  variant="body2"
+                  sx={{ textTransform: "none", minHeight: "20px" }}
+                >
+                  {displayedText}
+                </Typography>
+              </Stack>
             </Stack>
-          </Stack>
-        </CardContent>
-        <CardActions sx={{ mt: "-20px" }}>
-          <Stack direction="row-reverse" width="100%">
-            <BlinkingDownArrow isHidden={displayedText !== text} />
-          </Stack>
-        </CardActions>
-      </Card>
+          </CardContent>
+          <CardActions sx={{ mt: "-20px" }}>
+            <Stack direction="row-reverse" width="100%">
+              <BlinkingDownArrow isHidden={displayedText !== text} />
+            </Stack>
+          </CardActions>
+        </Card>
+      </Box>
     </Stack>
   );
 };

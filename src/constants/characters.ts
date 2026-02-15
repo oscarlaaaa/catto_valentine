@@ -11,6 +11,8 @@ import OSCAR_GIVE from "@assets/full_body/oscar-give.webp";
 import OSCAR_GRAB from "@assets/full_body/oscar-grab-something.webp";
 import OSCAR_HIT from "@assets/full_body/oscar-hit.webp";
 import OSCAR_STARE from "@assets/full_body/oscar-stare.webp";
+import OSCAR_GIVE_DUCK from "@assets/full_body/oscar-give-bouquet.webp";
+import OSCAR_SHOW_FACE from "@assets/full_body/oscar-show-face.webp";
 
 const OSCAR_CHARACTER: Character = {
   name: "Oscar",
@@ -28,6 +30,8 @@ const OSCAR_CHARACTER: Character = {
       grab: OSCAR_GRAB,
       hit: OSCAR_HIT,
       stare: OSCAR_STARE,
+      give_duck: OSCAR_GIVE_DUCK,
+      show_face: OSCAR_SHOW_FACE,
     },
   },
 };
@@ -53,6 +57,7 @@ const PEEPO_CHARACTER: Character = {
 };
 
 import PSYDUCK_PORTRAIT from "@assets/portraits/psyduck.webp";
+import PSYDUCK_PORTRAIT_ANGRY from "@assets/portraits/angry-psyduck.webp";
 // import PSYDUCK_SAD_PORTRAIT from "@assets/full_body/peepo-cry.webp";
 
 import PSYDUCK_FULL from "@assets/full_body/psyduck.webp";
@@ -62,6 +67,7 @@ const PSYDUCK_CHARACTER: Character = {
   images: {
     portraits: {
       normal: PSYDUCK_PORTRAIT,
+      angry: PSYDUCK_PORTRAIT_ANGRY,
     },
     full: {
       normal: PSYDUCK_FULL,
