@@ -14,7 +14,7 @@ import { wait } from "../../../../utils/wait";
 
 export const PatPsyduckScreen = () => {
   const { setCanAdvance, advanceContent } = useContentContext();
-  const [clickCount, setClickCount] = useState(19);
+  const [clickCount, setClickCount] = useState(0);
   const [isShaking, setIsShaking] = useState(false);
   const [smacked, setSmacked] = useState(false);
   const [psyduckText, setPsyduckText] = useState<string | null>(null);
