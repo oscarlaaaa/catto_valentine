@@ -77,15 +77,13 @@ export const DialogueTextBox = ({
   return (
     <Stack sx={{ width: "100%", textAlign: "left" }}>
       {fullBodyImagePath && (
-        <Stack width="100%" direction="row-reverse">
+        <Stack width="100%" direction="row-reverse" minHeight="50%">
           <img
             src={fullBodyImagePath}
             alt="peep"
             style={{
-              maxWidth: "70%",
-              maxHeight: "50vw",
               height: "auto",
-              width: "70%",
+              width: "50%",
             }}
           />
         </Stack>
@@ -126,7 +124,7 @@ export const DialogueTextBox = ({
             </Stack>
           </Stack>
         </CardContent>
-        <CardActions>
+        <CardActions sx={{ mt: "-20px" }}>
           <Stack direction="row-reverse" width="100%">
             <BlinkingDownArrow isHidden={displayedText !== text} />
           </Stack>

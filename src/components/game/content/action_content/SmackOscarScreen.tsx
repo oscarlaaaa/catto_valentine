@@ -1,28 +1,32 @@
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-import PEEPO_IMAGE_URL from "@assets/full_body/peepo.webp";
+import { CHARACTERS } from "../../../../constants/characters";
 
 import HAND_IMAGE_URL from "@assets/misc/hand.webp";
 import { useContentContext } from "../../../../context/ContentProvider";
 
 export const SmackOscarScreen = () => {
-  const { advanceContent } = useContentContext();
+  const { advanceContent, setCanAdvance } = useContentContext();
   const [isShaking, setIsShaking] = useState(false);
   const [smackPosition, setSmackPosition] = useState<[number, number] | null>(
     null,
   );
   const [hasClicked, setHasClicked] = useState(false);
-
-  const timeoutRef = useRef<number | null>(null);
+  const [currentImage, setCurrentImage] = useState<string>(
+    CHARACTERS.Oscar.images.full.normal,
+  );
 
   const smack = (event: { clientX: number; clientY: number }) => {
     const { clientX, clientY } = event;
+
     setSmackPosition([clientX, clientY]);
+    setIsShaking(true);
     setTimeout(() => {
       setSmackPosition(null);
+      setIsShaking(false);
     }, 100);
   };
 
@@ -32,15 +36,25 @@ export const SmackOscarScreen = () => {
     }
 
     setHasClicked(true);
-    setIsShaking(true);
     smack(event);
+    setCurrentImage(CHARACTERS.Oscar.images.full.hit);
 
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+    setTimeout(() => {
+      setCurrentImage(CHARACTERS.Oscar.images.full.dead);
+    }, 1000);
 
-    timeoutRef.current = setTimeout(() => setIsShaking(false), 100);
+    setTimeout(() => {
+      setCurrentImage(CHARACTERS.Oscar.images.full.crouch);
+    }, 3000);
+
+    setTimeout(() => {
+      advanceContent();
+    }, 4000);
   };
+
+  useEffect(() => {
+    setCanAdvance(true);
+  }, []);
 
   return (
     <Container
@@ -58,18 +72,17 @@ export const SmackOscarScreen = () => {
         <Stack
           width="100%"
           height="auto"
-          justifyContent="center"
+          minHeight="75vh"
           alignItems="center"
           gap={2}
+          direction="column-reverse"
         >
           <img
-            src={PEEPO_IMAGE_URL}
+            src={currentImage}
             alt="ducko sleepo"
             style={{
-              width: "100%",
+              width: "50%",
               height: `auto`,
-              maxWidth: "75vw",
-              maxHeight: "80vh",
               animation: isShaking ? "horizontal-shaking 0.2s" : "none",
             }}
           />

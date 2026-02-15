@@ -1,4 +1,4 @@
-import { DOOR_SCENE } from "./1_door_scene";
+import { PARK_SCENE } from "./2_park_scene";
 
-export const INITIAL_SCENE_TESTING = DOOR_SCENE;
-export const INITIAL_CONTENT_TESTING = "action-1-patto-peepo";
+export const INITIAL_SCENE_TESTING = PARK_SCENE;
+export const INITIAL_CONTENT_TESTING = "park-start";

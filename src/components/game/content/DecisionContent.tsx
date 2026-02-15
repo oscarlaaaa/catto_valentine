@@ -58,15 +58,25 @@ export const DecisionContent = ({
             <Collapse
               in={displayedText === currentDecision.prompt}
               timeout={1000}
+              sx={{ width: "100%" }}
             >
               <Stack
-                sx={{ justifyContent: "center", alignItems: "center", gap: 2 }}
+                sx={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: 1,
+                  width: "100%",
+                }}
               >
                 {currentDecision.options.map((option) => (
                   <Button
                     variant="contained"
                     fullWidth
-                    sx={{ color: "white", backgroundColor: "#69a2be" }}
+                    sx={{
+                      color: "white",
+                      backgroundColor: "#69a2be",
+                      textTransform: "lowercase",
+                    }}
                     key={option.text}
                     onClick={() => {
                       advanceContent(option.outcome);

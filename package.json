@@ -15,6 +15,8 @@
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.8",
     "@mui/material": "^7.3.8",
+    "eslint-plugin-react-dom": "^2.13.0",
+    "eslint-plugin-react-x": "^2.13.0",
     "module-alias": "^2.3.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
